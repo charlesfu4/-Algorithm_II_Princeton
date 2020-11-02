@@ -1,7 +1,7 @@
 # Algorithm_II_Princeton
 ## Week1 Reflection: WordNet (100/100)
 
-* DataStructer to store the synsets id and noun is essential for both method operation and time efficiency:
+* DataStructure to store the synsets id and noun is essential for both method operation and time efficiency:
   - First, I tried SymbolTable which implements TreeMap to store `<id, SET<noun>>`. This data structure will encounter problems in distance method, since we have to loop through every entry to find the nouns. Therefore, I reversed two elements as `<noun, SET<id>>`. The problem was solved.
   - Second, for the method ancestor, the required return variable is noun instead of integer. Therefore, the data structue above is inconvenient in returning the original string in the synset. I created a SymbolTable data structure to store `<id, nouns>` to solve this problem.
   - Third, I realize though SymbolTable provide logrithmic operation in several method. We do not need comparison-based operation on the data structure storing the synsets at all. Therefore, I decided to replace SymbolTable with LinearProbingHashST and SET to HashSet to push forward the time efficiency to constant.
@@ -20,7 +20,7 @@
   - Software Cache to accelerate between calling distance and ancestor
 
 ## Week2 Reflection: Seam Craving (101/100) 
-* Data Structer: 
+* Data Structure: 
   - The only data struture that we deal with is the energy array. Here, I picked an 1d array instead of 2d one to do all the operation. For an MxN array, it saves memory arround 24*M bytes. 
 * Thought of solution:
   - Finding Shortest path in a tological ordered DAG is all about relaxing the edge and add up the minimum distance. If we map the same concept to an 2d grid, what we need to do is to add up the minimum distances of reachable neighboring grids. This concept can be realized by dynamic programming.
@@ -33,5 +33,16 @@
 
 * Result:
   - Temppeliaukion kirkko(Failed)
-
+<p align="middle">
+  <img src="https://github.com/charlesfu4/Algorithm_II_Princeton/blob/master/Week8_SeamCraving/IMG_0894.JPG">
+</p>
+<p align="middle">
+  <img src="https://github.com/charlesfu4/Algorithm_II_Princeton/blob/master/Week8_SeamCraving/output2.jpg">
+</p>
   - Chameleon
+<p align="middle">
+  <img src="https://github.com/charlesfu4/Algorithm_II_Princeton/blob/master/Week8_SeamCraving/chameleon.png">
+</p>
+<p align="middle">
+  <img src="https://github.com/charlesfu4/Algorithm_II_Princeton/blob/master/Week8_SeamCraving/output.jpg">
+</p>

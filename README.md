@@ -31,18 +31,15 @@
   - The energy update part is optimized by my own dynamic programming thought, however, the Q&A session also mentioned to only update the pixels after the seam(included). My implementation apparently does not support this kind of optimization.
   - There is still limiation of this algorithm, see the result part where the Temppeliaukion kirkko still get distorted with this algorithm. 
 
-* Result:
-  - Temppeliaukion kirkko(Failed)
+* Results:
+  1. Temppeliaukion kirkko(Failed)
 <p align="middle">
-  <img src="https://github.com/charlesfu4/Algorithm_II_Princeton/blob/master/Week8_SeamCraving/IMG_0894.JPG">
+  <img src="https://github.com/charlesfu4/Algorithm_II_Princeton/blob/master/Week8_SeamCraving/IMG_0894.JPG", height = 300px>
+  <img src="https://github.com/charlesfu4/Algorithm_II_Princeton/blob/master/Week8_SeamCraving/output2.jpg", height = 300px>
 </p>
+
+  2. Chameleon
 <p align="middle">
-  <img src="https://github.com/charlesfu4/Algorithm_II_Princeton/blob/master/Week8_SeamCraving/output2.jpg">
-</p>
-  - Chameleon
-<p align="middle">
-  <img src="https://github.com/charlesfu4/Algorithm_II_Princeton/blob/master/Week8_SeamCraving/chameleon.png">
-</p>
-<p align="middle">
-  <img src="https://github.com/charlesfu4/Algorithm_II_Princeton/blob/master/Week8_SeamCraving/output.jpg">
+  <img src="https://github.com/charlesfu4/Algorithm_II_Princeton/blob/master/Week8_SeamCraving/chameleon.png", height = 200px>
+  <img src="https://github.com/charlesfu4/Algorithm_II_Princeton/blob/master/Week8_SeamCraving/output.jpg", height = 200px>
 </p>

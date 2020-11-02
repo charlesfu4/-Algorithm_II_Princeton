@@ -1,6 +1,6 @@
 /* *****************************************************************************
  *  Name: Chu-Cheng Fu
- *  Date: 31-10-2020
+ *  Date: 02-11-2020
  *  Description: SeamCarver Implementation
  **************************************************************************** */
 
@@ -8,7 +8,6 @@ import edu.princeton.cs.algs4.Picture;
 
 public class SeamCarver {
     private Picture processPic;
-    private boolean flag = false;
 
     // create a seam carver object based on the given picture
     public SeamCarver(Picture picture) {
@@ -46,62 +45,105 @@ public class SeamCarver {
 
     }
 
-    private int[] colsExtract(int x, int y) {
-        int[] rgb = new int[3];
-        int RGB = processPic.getRGB(x, y);
-        // shift the 32-bit rgb color and then AND with 8-bit 0XFF
-        rgb[0] = (RGB >> 16) & 0XFF;
-        rgb[1] = (RGB >> 8) & 0XFF;
-        rgb[2] = RGB & 0XFF;
-        return rgb;
-    }
-
-    // private method for complex calculation
-    private double grad(int x, int y) {
-        double energySum = 0.0;
-        // cache to avoid extract call of getRGB
-        int[] colsTop = colsExtract(x, y - 1);
-        int[] colsDown = colsExtract(x, y + 1);
-        int[] colsLeft = colsExtract(x - 1, y);
-        int[] colsRight = colsExtract(x + 1, y);
-        // loop through and sum up R, G, B
-        for (int i = 0; i < 3; i++) {
-            energySum += Math.pow(colsTop[i] - colsDown[i], 2) + Math
-                    .pow(colsLeft[i] - colsRight[i], 2);
-        }
-        return energySum;
-    }
 
     // sequence of indices for horizontal seam
     public int[] findHorizontalSeam() {
-        int[] seamArr;
-        if (flag) {
-            seamArr = findVerticalSeam();
-        }
-        else {
-            transpose();
-            seamArr = findVerticalSeam();
-            flag = true;
-        }
 
+        // first create the energy array
+        int w = processPic.width();
+        int h = processPic.height();
+        double[] energyArr = new double[w * h];
+        int[] seamArr = new int[w];
+        // tracker for min SP in the last second row
+        int minIdx = 0;
+        double min = Double.MAX_VALUE;
+
+        // local var for the energy +
+        // Dynamic programming for the shortest path
+        for (int j = 0; j < w; j++) {
+            for (int i = 0; i < h; i++) {
+                // first column
+                if (j == 0) energyArr[j * h + i] = energy(j, i);
+
+                    // rest column
+                else {
+                    // on the top border
+                    if (i == 0) {
+                        energyArr[j * h + i] =
+                                Math.min(energyArr[(j - 1) * h + i], energyArr[(j - 1) * h + i + 1])
+                                        + energy(j, i);
+                        // record the last second column for later comparison
+                        if (j == w - 2) {
+                            min = energyArr[j * h + i];
+                            minIdx = i;
+                        }
+                    }
+                    // on the bottom border
+                    else if (i == h - 1) {
+                        energyArr[j * h + i] =
+                                Math.min(energyArr[(j - 1) * h + i - 1], energyArr[(j - 1) * h + i])
+                                        + energy(j, i);
+                        // record the last second column for later comparison
+                        if (j == w - 2 && energyArr[j * h + i] <= min) {
+                            min = energyArr[j * h + i];
+                            minIdx = i;
+                        }
+                    }
+                    // within
+                    else {
+                        energyArr[j * h + i] = Math.min(
+                                Math.min(energyArr[(j - 1) * h + i - 1], energyArr[(j - 1) * h + i])
+                                , energyArr[(j - 1) * h + i + 1]) + energy(j, i);
+                        // record the last second column for later comparison
+                        if (j == w - 2 && energyArr[j * h + i] <= min) {
+                            min = energyArr[j * h + i];
+                            minIdx = i;
+                        }
+                    }
+                }
+
+            }
+        }
+        // record the last and last second column min
+        seamArr[w - 1] = minIdx;
+        // special case if there is only one column
+        if (w > 1)
+            seamArr[w - 2] = minIdx;
+
+        // Now walk along back from the shortest path
+        // to collect the entries
+        for (int j = w - 2; j >= 0; --j) {
+            //  the bottom entry on the left border
+            if (seamArr[j + 1] == 0) {
+                if (energyArr[j * h] <= energyArr[j * h + 1])
+                    seamArr[j] = 0;
+                else seamArr[j] = 1;
+            }
+            // the bottom entry on the right border
+            else if (seamArr[j + 1] == h - 1) {
+                if (energyArr[j * h + h - 1] <= energyArr[j * h + h - 2])
+                    seamArr[j] = h - 1;
+                else seamArr[j] = h - 2;
+            }
+            // within: compare three energy above
+            else {
+                double minThree = Double.MAX_VALUE;
+                int minthreeIdx = -1;
+                for (int i = -1; i <= 1; i++) {
+                    if (energyArr[j * h + seamArr[j + 1] + i] <= minThree) {
+                        minThree = energyArr[j * h + seamArr[j + 1] + i];
+                        minthreeIdx = seamArr[j + 1] + i;
+                    }
+
+                }
+                // assign the index afterward
+                seamArr[j] = minthreeIdx;
+            }
+        }
 
         return seamArr;
     }
 
-    // private method for transposing pic
-
-    private void transpose() {
-        int w = processPic.height();
-        int h = processPic.width();
-        Picture transPic = new Picture(w, h);
-        // loop through to implant pixels
-        for (int i = 0; i < w; i++) {
-            for (int j = 0; j < h; j++) {
-                transPic.setRGB(i, j, processPic.getRGB(j, i));
-            }
-        }
-        processPic = transPic;
-    }
 
     // sequence of indices for vertical seam
     public int[] findVerticalSeam() {
@@ -201,9 +243,10 @@ public class SeamCarver {
     // remove horizontal seam from current picture
     public void removeHorizontalSeam(int[] seam) {
         int h = height();
+        int w = width();
         if (seam == null) throw new IllegalArgumentException();
         // wrong length
-        if (seam.length != width() || processPic.height() <= 1)
+        if (seam.length != w || h <= 1)
             throw new IllegalArgumentException();
 
         for (int i = 0; i < seam.length; i++) {
@@ -217,14 +260,24 @@ public class SeamCarver {
             }
         }
 
-        if (flag)
-            removeVerticalSeam(seam);
-        else {
-            transpose();
-            removeVerticalSeam(seam);
+        // copy the picture first
+        Picture copy = picture();
+        // overwrite current pic with width = w -1
+        processPic = new Picture(copy.width(), copy.height() - 1);
+        h = height(); // update the height
+        for (int j = 0; j < w; j++) {
+            for (int i = 0; i < h; i++) {
+                // pass the deleted pixel
+                if (i >= seam[j])
+                    processPic.setRGB(j, i, copy.getRGB(j, i + 1));
+
+                    // fill in pixels
+                else
+                    processPic.setRGB(j, i, copy.getRGB(j, i));
+            }
+
         }
-        transpose();
-        flag = false;
+
     }
 
     // remove vertical seam from current picture
@@ -267,6 +320,48 @@ public class SeamCarver {
         }
     }
 
+    // Color RGB extraction function
+    private int[] colsExtract(int x, int y) {
+        int[] rgb = new int[3];
+        int RGB = processPic.getRGB(x, y);
+        // shift the 32-bit rgb color and then AND with 8-bit 0XFF
+        rgb[0] = (RGB >> 16) & 0XFF;
+        rgb[1] = (RGB >> 8) & 0XFF;
+        rgb[2] = RGB & 0XFF;
+        return rgb;
+    }
+
+    // private method for complex calculation
+    private double grad(int x, int y) {
+        double energySum = 0.0;
+        // cache to avoid extract call of getRGB
+        int[] colsTop = colsExtract(x, y - 1);
+        int[] colsDown = colsExtract(x, y + 1);
+        int[] colsLeft = colsExtract(x - 1, y);
+        int[] colsRight = colsExtract(x + 1, y);
+        // loop through and sum up R, G, B
+        for (int i = 0; i < 3; i++) {
+            energySum += Math.pow(colsTop[i] - colsDown[i], 2) + Math
+                    .pow(colsLeft[i] - colsRight[i], 2);
+        }
+        return energySum;
+    }
+
+    /*
+    // private method for transposing pic
+    private void transpose() {
+        int w = processPic.height();
+        int h = processPic.width();
+        Picture transPic = new Picture(w, h);
+        // loop through to implant pixels
+        for (int i = 0; i < w; i++) {
+            for (int j = 0; j < h; j++) {
+                transPic.setRGB(i, j, processPic.getRGB(j, i));
+            }
+        }
+        processPic = transPic;
+    }
+    */
     //  unit testing (optional)
     public static void main(String[] args) {
 

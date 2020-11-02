@@ -19,4 +19,19 @@
   - A better SAP implementation in finding same ancestor 
   - Software Cache to accelerate between calling distance and ancestor
 
-## Week2 Reflection: Seam Craving (99/100) 
+## Week2 Reflection: Seam Craving (101/100) 
+* Data Structer: 
+  - The only data struture that we deal with is the energy array. Here, I picked an 1d array instead of 2d one to do all the operation. For an MxN array, it saves memory arround 24*M bytes. 
+* Thought of solution:
+  - Finding Shortest path in a tological ordered DAG is all about relaxing the edge and add up the minimum distance. If we map the same concept to an 2d grid, what we need to do is to add up the minimum distances of reachable neighboring grids. This concept can be realized by dynamic programming.
+* Errors when testing:
+  - Time testing-Test 1: Transpose is recommended in the Q&A session. However, I found out that due to my previous implementation(transpose the Picture), I cannot save the number of transposes if I do not know the sequence and number of resize and find. Meawhile, even the picture is tranposed, it still need to wlak through the dynamic programming part. Therefore, I decided to rewrite the vertical part in horizontal ones. This really save memory and time that tranpose a picture takes.
+ 
+* Further optimization can be done:
+  - The energy update part is optimized by my own dynamic programming thought, however, the Q&A session also mentioned to only update the pixels after the seam(included). My implementation apparently does not support this kind of optimization.
+  - There is still limiation of this algorithm, see the result part where the Temppeliaukion kirkko still get distorted with this algorithm. 
+
+* Result:
+  - Temppeliaukion kirkko(Failed)
+
+  - Chameleon

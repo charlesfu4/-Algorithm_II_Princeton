@@ -19,7 +19,7 @@
   - A better SAP implementation in finding same ancestor 
   - Software Cache to accelerate between calling distance and ancestor
 
-## Week2 Reflection: Seam Craving (101/100) 
+## Week2 Reflection: Seam Carving (101/100) 
 * Data Structure: 
   - The only data struture that we deal with is the energy array. Here, I picked an 1d array instead of 2d one to do all the operation. For an MxN array, it saves memory arround 24*M bytes. 
 * Thought of solution:
@@ -33,11 +33,11 @@
 
 * Results:
 <p align="middle">
-  <img src="https://github.com/charlesfu4/Algorithm_II_Princeton/blob/master/Week8_SeamCraving/IMG_0894.JPG", height = 300px>
-  <img src="https://github.com/charlesfu4/Algorithm_II_Princeton/blob/master/Week8_SeamCraving/output2.jpg", height = 300px>
+  <img src="https://github.com/charlesfu4/Algorithm_II_Princeton/blob/master/Week8_SeamCarving/IMG_0894.JPG", height = 300px>
+  <img src="https://github.com/charlesfu4/Algorithm_II_Princeton/blob/master/Week8_SeamCarving/output2.jpg", height = 300px>
 </p>
 
 <p align="middle">
-  <img src="https://github.com/charlesfu4/Algorithm_II_Princeton/blob/master/Week8_SeamCraving/chameleon.png", height = 200px>
-  <img src="https://github.com/charlesfu4/Algorithm_II_Princeton/blob/master/Week8_SeamCraving/output.jpg", height = 200px>
+  <img src="https://github.com/charlesfu4/Algorithm_II_Princeton/blob/master/Week8_SeamCarving/chameleon.png", height = 200px>
+  <img src="https://github.com/charlesfu4/Algorithm_II_Princeton/blob/master/Week8_SeamCarving/output.jpg", height = 200px>
 </p>

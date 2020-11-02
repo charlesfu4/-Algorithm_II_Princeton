@@ -32,13 +32,11 @@
   - There is still limiation of this algorithm, see the result part where the Temppeliaukion kirkko still get distorted with this algorithm. 
 
 * Results:
-  1. Temppeliaukion kirkko(Failed)
 <p align="middle">
   <img src="https://github.com/charlesfu4/Algorithm_II_Princeton/blob/master/Week8_SeamCraving/IMG_0894.JPG", height = 300px>
   <img src="https://github.com/charlesfu4/Algorithm_II_Princeton/blob/master/Week8_SeamCraving/output2.jpg", height = 300px>
 </p>
 
-  2. Chameleon
 <p align="middle">
   <img src="https://github.com/charlesfu4/Algorithm_II_Princeton/blob/master/Week8_SeamCraving/chameleon.png", height = 200px>
   <img src="https://github.com/charlesfu4/Algorithm_II_Princeton/blob/master/Week8_SeamCraving/output.jpg", height = 200px>

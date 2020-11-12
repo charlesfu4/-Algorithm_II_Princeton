@@ -41,3 +41,15 @@
   <img src="https://github.com/charlesfu4/Algorithm_II_Princeton/blob/master/Week8_SeamCarving/chameleon.png", height = 200px>
   <img src="https://github.com/charlesfu4/Algorithm_II_Princeton/blob/master/Week8_SeamCarving/output.jpg", height = 200px>
 </p>
+
+
+## Week3 Reflection: Baseball Elimination (100/100) 
+* Data Structure: 
+  - I firstly created Record comparable data type to store the records of each team, this is mainly because I believed that sorting the record beforehand by number of wins and then number of remaining games will help in trivial-elimination. However, this is questionable when records like `(w, l, r) = (0, 0, 63) ,(32, 31, 0), (31, 32 ,0)` appear. The sequence can be problemetic. Therefore, I then simply stored the records in seperated integer arraies and link the team name with the indices by HashMap.  
+
+* Difficulties:
+  - The trivial-eliminated teams should not be taken into consideration when examine if a team is non-trivial eliminated. However, the correponding vertices should still be included when checking other teams. Same thought is applicable to non-trivial eliminated teams. Do not drop them out when constructing the FlowNet. It was not clear and I spent one week in this pitfall. But afterward it is quite intuitive that if we remove this corresponding vertices, the impact of the team to the whole net work is not complete. 
+  - To construct the FlowNet, I selected to store the remaining record excluding current examined team into new space and then walking through the indices. This is very complex but can be solved by doing some math in some simple examples.
+
+* Errors when testing:
+  - `against` should not throw IllegalArgumentException when two team are the same. It will return 0. 

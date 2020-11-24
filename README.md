@@ -53,3 +53,7 @@
 
 * Errors when testing:
   - `against` should not throw IllegalArgumentException when two team are the same. It will return 0. 
+
+## Week4 Reflection: Boggle (86/100)
+
+* Need to redesign the data structure

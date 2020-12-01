@@ -33,13 +33,13 @@
 
 * Results:
 <p align="middle">
-  <img src="https://github.com/charlesfu4/Algorithm_II_Princeton/blob/master/Week8_SeamCarving/IMG_0894.JPG", height = 300px>
-  <img src="https://github.com/charlesfu4/Algorithm_II_Princeton/blob/master/Week8_SeamCarving/output2.jpg", height = 300px>
+  <img src="https://github.com/charlesfu4/Algorithm_II_Princeton/blob/master/Week08_SeamCarving/IMG_0894.JPG", height = 300px>
+  <img src="https://github.com/charlesfu4/Algorithm_II_Princeton/blob/master/Week08_SeamCarving/output2.jpg", height = 300px>
 </p>
 
 <p align="middle">
-  <img src="https://github.com/charlesfu4/Algorithm_II_Princeton/blob/master/Week8_SeamCarving/chameleon.png", height = 200px>
-  <img src="https://github.com/charlesfu4/Algorithm_II_Princeton/blob/master/Week8_SeamCarving/output.jpg", height = 200px>
+  <img src="https://github.com/charlesfu4/Algorithm_II_Princeton/blob/master/Week08_SeamCarving/chameleon.png", height = 200px>
+  <img src="https://github.com/charlesfu4/Algorithm_II_Princeton/blob/master/Week08_SeamCarving/output.jpg", height = 200px>
 </p>
 
 
@@ -56,7 +56,13 @@
 
 ## Week4 Reflection: Boggle (100/100)
 
-* Data Structure:  
-* Thought of Solution:
+* Data Structure: An initial trail by applying normal tries led to memory issue. Therefore, I decided to apply ternany trie set. This lead the score to 86 with low speed. The cause of the low speed is originated from the instance method for algs4 data structures of tries. They search for and retrieve specifc strings from the top root of the tries tree every time. However, in this application, prefix checking can be wisely designed by Node memorizing. In this way, every next prefix search does not need to start from the root. Which saves tremendous amount of time.
+
+
 * Further Optimization:
+  - A non recursive prefix search can be implemented to push the speed higher. Probably need to design a dynamic programming approach.
+
+* Errors when testing:
+  - Adjacent list of each character was not designde carefully to address 1d array. 
+  - Compliation warning of the data structure chosen to save adjacent list. This problem can be solve by using ArrayList to store the Bag instead of casting Bag object array directly to primitive type array.
 

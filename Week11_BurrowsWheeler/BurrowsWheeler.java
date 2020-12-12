@@ -7,9 +7,6 @@
 import edu.princeton.cs.algs4.BinaryStdIn;
 import edu.princeton.cs.algs4.BinaryStdOut;
 
-import java.util.Arrays;
-import java.util.HashSet;
-
 
 public class BurrowsWheeler {
 
@@ -40,35 +37,20 @@ public class BurrowsWheeler {
         int len = s.length;
         char[] aux = new char[len];
         int[] next = new int[len];
-        HashSet<Character> list = new HashSet<>();
 
-        // calculate R
-        for (int i = 0; i < len; i++) {
-            list.add(s[i]);
-        }
-        int R = list.size();
-        // create sorted radix array
-
-        char[] radix = new char[R];
-        for (int r = 0; r < R; r++) {
-            radix[r] = (char) list.toArray()[r];
-        }
-        Arrays.sort(radix);
-        String rx = new String(radix);
-
-        int[] count = new int[R + 1];
+        int[] count = new int[256 + 1];
 
         // Now counting sort and accumulate
         for (int i = 0; i < len; i++)
-            count[rx.indexOf(s[i]) + 1]++;
+            count[s[i] + 1]++;
 
-        for (int r = 0; r < R; r++)
+        for (int r = 0; r < 256; r++)
             count[r + 1] += count[r];
         // When print out the position after sorted
         // we increase count
         for (int i = 0; i < len; i++) {
-            next[count[rx.indexOf(s[i])]] = i;
-            aux[count[rx.indexOf(s[i])]++] = s[i];
+            next[count[s[i]]] = i;
+            aux[count[s[i]]++] = s[i];
         }
 
         int c = 0;

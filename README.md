@@ -67,6 +67,6 @@
   - Compliation warning of the data structure chosen to save adjacent list. This problem can be solve by using ArrayList to store the Bag instead of casting Bag object array directly to primitive type array.
 
 
-## Week11 Reflection: BurrowsWheeler (99.6/100)
+## Week11 Reflection: BurrowsWheeler (100/100)
 
-* Radix sort in inverseTransform still need to be optimized 
+* Move to front decode and encode can be optimized.

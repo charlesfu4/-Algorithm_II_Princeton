@@ -1,5 +1,5 @@
 # Algorithm_II_Princeton
-## Week1 Reflection: WordNet (100/100)
+## Week7 Reflection: WordNet (100/100)
 
 * DataStructure to store the synsets id and noun is essential for both method operation and time efficiency:
   - First, I tried SymbolTable which implements TreeMap to store `<id, SET<noun>>`. This data structure will encounter problems in distance method, since we have to loop through every entry to find the nouns. Therefore, I reversed two elements as `<noun, SET<id>>`. The problem was solved.
@@ -19,7 +19,7 @@
   - A better SAP implementation in finding same ancestor 
   - Software Cache to accelerate between calling distance and ancestor
 
-## Week2 Reflection: Seam Carving (101/100) 
+## Week8 Reflection: Seam Carving (101/100) 
 * Data Structure: 
   - The only data struture that we deal with is the energy array. Here, I picked an 1d array instead of 2d one to do all the operation. For an MxN array, it saves memory arround 24*M bytes. 
 * Thought of solution:
@@ -43,7 +43,7 @@
 </p>
 
 
-## Week3 Reflection: Baseball Elimination (100/100) 
+## Week9 Reflection: Baseball Elimination (100/100) 
 * Data Structure: 
   - I firstly created Record comparable data type to store the records of each team, this is mainly because I believed that sorting the record beforehand by number of wins and then number of remaining games will help in trivial-elimination. However, this is questionable when records like `(w, l, r) = (0, 0, 63) ,(32, 31, 0), (31, 32 ,0)` appear. The sequence can be problemetic. Therefore, I then simply stored the records in seperated integer arraies and link the team name with the indices by HashMap.  
 
@@ -54,7 +54,7 @@
 * Errors when testing:
   - `against` should not throw IllegalArgumentException when two team are the same. It will return 0. 
 
-## Week4 Reflection: Boggle (100/100)
+## Week10 Reflection: Boggle (100/100)
 
 * Data Structure: An initial trail by applying normal tries led to memory issue. Therefore, I decided to apply ternany trie set. This lead the score to 86 with low speed. The cause of the low speed is originated from the instance method for algs4 data structures of tries. They search for and retrieve specifc strings from the top root of the tries tree every time. However, in this application, prefix checking can be wisely designed by Node memorizing. In this way, every next prefix search does not need to start from the root. Which saves tremendous amount of time.
 
@@ -66,3 +66,7 @@
   - Adjacent list of each character was not designde carefully to address 1d array. 
   - Compliation warning of the data structure chosen to save adjacent list. This problem can be solve by using ArrayList to store the Bag instead of casting Bag object array directly to primitive type array.
 
+
+## Week11 Reflection: BurrowsWheeler (99.6/100)
+
+* Radix sort in inverseTransform still need to be optimized 

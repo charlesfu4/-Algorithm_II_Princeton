@@ -69,4 +69,13 @@
 
 ## Week11 Reflection: BurrowsWheeler (100/100)
 
-* Move to front decode and encode can be optimized.
+* Data Structure: 
+  - Move to front: I selected string builder for the delete and append operation frequently used in this class. 
+  - CircularSuffix: A circular suffix object with a pointer of starting index and reference is the textbook solution. However, this method still leads to N times of instantiating given the string with length equals N. I then made use of the suffix sort in the course and extended the original string. The sorting is a 3-way quick sort with only index operations. This drametically increases the efficiency.
+  - Burrows Wheeler Tranformation: The inverse transfrom part is very tricky. However, once reviewing radix sort, I realized that it is just the by product of the indexes during the process. 
+
+* Further Optimization:
+  - Move to front is still around the boundary of the reference solution speed. A better way to implement it must exist Another minor optimization is caching the previous charater to save number of operations needed.
+  - CircularSuffix sorting can implementing with a cut-off value that use insertion sort that make the sorting faster.
+  - Radix sort can be faster by limit the number of alphebats. 
+
